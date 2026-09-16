@@ -1,7 +1,15 @@
 import { BackHandler as RNBackHandler, Text } from 'react-native';
 import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { act, userEvent } from '@testing-library/react-native';
 
 import { render, screen } from '../../test-utils';
@@ -18,6 +26,7 @@ jest.mock('react-native-safe-area-context', () => ({
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
+  exitApp: jest.Mock<() => void>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
@@ -38,6 +47,12 @@ describe('Modal', () => {
       window.requestAnimationFrame as unknown as { mockRestore(): void }
     ).mockRestore();
     /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
+  });
+
+  // `exitApp` is one module-level `jest.fn` shared by every test in the file,
+  // and nothing clears it globally.
+  beforeEach(() => {
+    BackHandler.exitApp.mockClear();
   });
 
   describe('by default', () => {
@@ -330,6 +345,27 @@ describe('Modal', () => {
         });
 
         expect(onDismiss).not.toHaveBeenCalled();
+      });
+
+      it('should not let the press leave the screen behind it', async () => {
+        await render(
+          <Portal.Host>
+            <Modal
+              testID="modal"
+              visible
+              onDismiss={() => {}}
+              dismissable={false}
+            >
+              {null}
+            </Modal>
+          </Portal.Host>
+        );
+
+        await act(() => {
+          BackHandler.mockPressBack();
+        });
+
+        expect(BackHandler.exitApp).not.toHaveBeenCalled();
       });
     });
   });
