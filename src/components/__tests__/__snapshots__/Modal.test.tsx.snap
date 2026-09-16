@@ -50,7 +50,6 @@ exports[`Modal by default should receive appropriate top and bottom insets 1`] =
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -233,7 +232,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -416,7 +414,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -599,7 +596,6 @@ exports[`Modal when open as non-dismissible modal if closed via Android back but
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -782,7 +778,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -965,7 +960,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -1148,7 +1142,6 @@ exports[`Modal when open as non-dismissible modal if closed via touching backdro
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -1332,7 +1325,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -1516,7 +1508,6 @@ exports[`Modal when open if backdrop touched should invoke the onDismiss functio
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -1700,7 +1691,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 1`]
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -1884,7 +1874,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 2`]
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -2068,7 +2057,6 @@ exports[`Modal when open if closed via Android back button invokes onDismiss 3`]
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -2252,7 +2240,6 @@ exports[`Modal when open runs the closing animation if visible toggled 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -2436,7 +2423,6 @@ exports[`Modal when open runs the closing animation if visible toggled 2`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -2620,7 +2606,6 @@ exports[`Modal when open runs the closing animation if visible toggled 3`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -2804,7 +2789,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -2988,7 +2972,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -3172,7 +3155,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -3356,7 +3338,6 @@ exports[`Modal when visible prop changes again during the open/close animation w
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -3540,7 +3521,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -3724,7 +3704,6 @@ exports[`Modal when visible prop changes from false to true (closed to open) sho
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -3907,7 +3886,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -4090,7 +4068,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -4274,7 +4251,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {
@@ -4458,7 +4434,6 @@ exports[`Modal when visible prop changes from true to false (open to closed) sho
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    role="button"
     style={
       [
         {

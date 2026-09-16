@@ -202,7 +202,7 @@ function Modal({
     );
 
     return () => subscription.remove();
-  }, [dismissable, dismissableBackButton, onDismissCallback, visible]);
+  }, [dismissableBackButton, onDismissCallback, visible]);
 
   const transitionTimingFunction = cubicBezier(1 / 3, 1, 2 / 3, 1);
 
@@ -239,7 +239,6 @@ function Modal({
       testID={testID}
     >
       <AnimatedPressable
-        role="button"
         disabled={!dismissable}
         aria-hidden
         onPress={dismissable ? onDismissCallback : undefined}
