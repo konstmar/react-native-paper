@@ -124,17 +124,17 @@ it('stacks components mounted in the same commit in source order', async () => {
   expect(layers[1]).toHaveTextContent('dialog');
 });
 
-it('hides the app content from assistive technology while an overlay is open', async () => {
+it('hides the app content from assistive technology while a modal is open', async () => {
   await render(
     <Portal.Host>
       <Text>page content</Text>
-      <Portal overlay>
-        <Text>overlay content</Text>
+      <Portal modal>
+        <Text>modal content</Text>
       </Portal>
     </Portal.Host>
   );
 
-  expect(screen.getByText('overlay content')).toBeVisible();
+  expect(screen.getByText('modal content')).toBeVisible();
 
   const pageContent = screen.getByText('page content', {
     includeHiddenElements: true,
@@ -145,7 +145,7 @@ it('hides the app content from assistive technology while an overlay is open', a
   expect(pageContent).not.toBeVisible();
 });
 
-it('leaves the app content reachable for a portal that is not an overlay', async () => {
+it('leaves the app content reachable for a portal that is not a modal', async () => {
   await render(
     <Portal.Host>
       <Text>page content</Text>
@@ -159,10 +159,10 @@ it('leaves the app content reachable for a portal that is not an overlay', async
   expect(screen.getByText('page content')).toBeVisible();
 });
 
-it('keeps a portal opened on top of an overlay reachable', async () => {
+it('keeps a portal opened on top of a modal reachable', async () => {
   await render(
     <Portal.Host>
-      <Portal overlay>
+      <Portal modal>
         <Text>dialog content</Text>
       </Portal>
       <Portal>
@@ -175,13 +175,13 @@ it('keeps a portal opened on top of an overlay reachable', async () => {
   expect(screen.getByText('dialog content')).toBeVisible();
 });
 
-it('hides an overlay that another overlay was opened on top of', async () => {
+it('hides a modal that another modal was opened on top of', async () => {
   await render(
     <Portal.Host>
-      <Portal overlay>
+      <Portal modal>
         <Text>lower dialog</Text>
       </Portal>
-      <Portal overlay>
+      <Portal modal>
         <Text>upper dialog</Text>
       </Portal>
     </Portal.Host>
@@ -193,17 +193,17 @@ it('hides an overlay that another overlay was opened on top of', async () => {
   ).not.toBeVisible();
 });
 
-it('makes the app content reachable again once the overlay closes', async () => {
+it('makes the app content reachable again once the modal closes', async () => {
   const { rerender } = await render(
     <Portal.Host>
       <Text>page content</Text>
-      <Portal overlay>
-        <Text>overlay content</Text>
+      <Portal modal>
+        <Text>modal content</Text>
       </Portal>
     </Portal.Host>
   );
 
-  expect(screen.getByText('overlay content')).toBeVisible();
+  expect(screen.getByText('modal content')).toBeVisible();
   expect(
     screen.getByText('page content', { includeHiddenElements: true })
   ).not.toBeVisible();
@@ -211,8 +211,8 @@ it('makes the app content reachable again once the overlay closes', async () => 
   await rerender(
     <Portal.Host>
       <Text>page content</Text>
-      <Portal overlay={false}>
-        <Text>overlay content</Text>
+      <Portal modal={false}>
+        <Text>modal content</Text>
       </Portal>
     </Portal.Host>
   );
@@ -220,17 +220,17 @@ it('makes the app content reachable again once the overlay closes', async () => 
   expect(screen.getByText('page content')).toBeVisible();
 });
 
-it('makes the app content reachable again once the overlay unmounts', async () => {
+it('makes the app content reachable again once the modal unmounts', async () => {
   const { rerender } = await render(
     <Portal.Host>
       <Text>page content</Text>
-      <Portal overlay>
-        <Text>overlay content</Text>
+      <Portal modal>
+        <Text>modal content</Text>
       </Portal>
     </Portal.Host>
   );
 
-  expect(screen.getByText('overlay content')).toBeVisible();
+  expect(screen.getByText('modal content')).toBeVisible();
   expect(
     screen.getByText('page content', { includeHiddenElements: true })
   ).not.toBeVisible();
@@ -241,6 +241,6 @@ it('makes the app content reachable again once the overlay unmounts', async () =
     </Portal.Host>
   );
 
-  expect(screen.queryByText('overlay content')).not.toBeOnTheScreen();
+  expect(screen.queryByText('modal content')).not.toBeOnTheScreen();
   expect(screen.getByText('page content')).toBeVisible();
 });

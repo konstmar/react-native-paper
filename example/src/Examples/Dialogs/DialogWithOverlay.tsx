@@ -9,7 +9,7 @@ const DialogWithOverlay = ({
   visible: boolean;
   close: () => void;
 }) => (
-  <Portal overlay={visible}>
+  <Portal modal={visible}>
     <Dialog onDismiss={close} visible={visible}>
       <Dialog.Title>Alert</Dialog.Title>
       <Dialog.Content>

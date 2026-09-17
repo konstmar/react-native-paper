@@ -7,18 +7,18 @@ export type Props = {
 };
 
 type Operation =
-  | { type: 'mount'; key: number; children: React.ReactNode; overlay?: boolean }
+  | { type: 'mount'; key: number; children: React.ReactNode; modal?: boolean }
   | {
       type: 'update';
       key: number;
       children: React.ReactNode;
-      overlay?: boolean;
+      modal?: boolean;
     }
   | { type: 'unmount'; key: number };
 
 export type PortalMethods = {
-  mount: (children: React.ReactNode, overlay?: boolean) => number;
-  update: (key: number, children: React.ReactNode, overlay?: boolean) => void;
+  mount: (children: React.ReactNode, modal?: boolean) => number;
+  update: (key: number, children: React.ReactNode, modal?: boolean) => void;
   unmount: (key: number) => void;
 };
 
@@ -61,10 +61,10 @@ export default class PortalHost extends React.Component<Props> {
       if (action) {
         switch (action.type) {
           case 'mount':
-            manager.mount(action.key, action.children, action.overlay);
+            manager.mount(action.key, action.children, action.modal);
             break;
           case 'update':
-            manager.update(action.key, action.children, action.overlay);
+            manager.update(action.key, action.children, action.modal);
             break;
           case 'unmount':
             manager.unmount(action.key);
@@ -78,13 +78,13 @@ export default class PortalHost extends React.Component<Props> {
     this.manager = manager;
   };
 
-  private mount = (children: React.ReactNode, overlay?: boolean) => {
+  private mount = (children: React.ReactNode, modal?: boolean) => {
     const key = this.nextKey++;
 
     if (this.manager) {
-      this.manager.mount(key, children, overlay);
+      this.manager.mount(key, children, modal);
     } else {
-      this.queue.push({ type: 'mount', key, children, overlay });
+      this.queue.push({ type: 'mount', key, children, modal });
     }
 
     return key;
@@ -93,12 +93,12 @@ export default class PortalHost extends React.Component<Props> {
   private update = (
     key: number,
     children: React.ReactNode,
-    overlay?: boolean
+    modal?: boolean
   ) => {
     if (this.manager) {
-      this.manager.update(key, children, overlay);
+      this.manager.update(key, children, modal);
     } else {
-      const op: Operation = { type: 'mount', key, children, overlay };
+      const op: Operation = { type: 'mount', key, children, modal };
       const index = this.queue.findIndex(
         (o) =>
           (o.type === 'mount' && o.key === key) ||
@@ -134,10 +134,9 @@ export default class PortalHost extends React.Component<Props> {
           unmount: this.unmount,
         }}
       >
-        <PortalManager
-          ref={this.setManager}
-          pageContent={this.props.children}
-        />
+        <PortalManager ref={this.setManager}>
+          {this.props.children}
+        </PortalManager>
       </PortalContext.Provider>
     );
   }

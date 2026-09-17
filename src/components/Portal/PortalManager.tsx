@@ -4,14 +4,14 @@ import { StyleSheet } from 'react-native';
 import OverlayLayer from './OverlayLayer';
 
 type Props = {
-  pageContent?: React.ReactNode;
+  children: React.ReactNode;
 };
 
 type State = {
   portals: Array<{
     key: number;
     children: React.ReactNode;
-    overlay?: boolean;
+    modal?: boolean;
   }>;
 };
 
@@ -23,17 +23,17 @@ export default class PortalManager extends React.PureComponent<Props, State> {
     portals: [],
   };
 
-  mount = (key: number, children: React.ReactNode, overlay?: boolean) => {
+  mount = (key: number, children: React.ReactNode, modal?: boolean) => {
     this.setState((state) => ({
-      portals: [...state.portals, { key, children, overlay }],
+      portals: [...state.portals, { key, children, modal }],
     }));
   };
 
-  update = (key: number, children: React.ReactNode, overlay?: boolean) =>
+  update = (key: number, children: React.ReactNode, modal?: boolean) =>
     this.setState((state) => ({
       portals: state.portals.map((item) => {
         if (item.key === key) {
-          return { ...item, children, overlay };
+          return { ...item, children, modal };
         }
         return item;
       }),
@@ -47,25 +47,24 @@ export default class PortalManager extends React.PureComponent<Props, State> {
   render() {
     const { portals } = this.state;
 
-    const topmostOverlayIndex = portals.findLastIndex(
-      (portal) => portal.overlay
-    );
+    const topmostModalIndex = portals.findLastIndex((portal) => portal.modal);
 
     return (
       <>
-        {/* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */}
         <OverlayLayer
-          inert={topmostOverlayIndex >= 0}
+          inert={topmostModalIndex >= 0}
           style={styles.container}
-          collapsable={false}
+          collapsable={
+            false /* Need collapsable=false here to clip the elevations, otherwise they appear above Portal components */
+          }
           pointerEvents="box-none"
         >
-          {this.props.pageContent}
+          {this.props.children}
         </OverlayLayer>
         {portals.map(({ key, children }, index) => (
           <OverlayLayer
             key={key}
-            inert={index < topmostOverlayIndex}
+            inert={index < topmostModalIndex}
             collapsable={
               false /* Need collapsable=false here to clip the elevations, otherwise they appear above sibling components */
             }

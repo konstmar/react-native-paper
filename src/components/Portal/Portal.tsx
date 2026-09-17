@@ -17,15 +17,11 @@ export type Props = {
    */
   children: React.ReactNode;
   /**
-   * Whether this portal hides everything below it -- the app content and any
-   * portal mounted before it -- from screen readers and the focus order.
-   * Portals mounted after it stay reachable.
+   * Whether the portal hides items below it from screen readers and focus order.
    *
-   * Tie it to whether the overlay is open rather than to how long it stays
-   * painted: a layer gives the screen back the moment it starts closing, so
-   * what is underneath is reachable again while the overlay fades out.
+   * Ensure it's set to true only when the modal is open.
    */
-  overlay?: boolean;
+  modal?: boolean;
   /**
    * @optional
    */
@@ -52,7 +48,7 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Portal = ({ children, overlay, theme: themeOverrides }: Props) => {
+const Portal = ({ children, modal, theme: themeOverrides }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const settings = React.useContext(SettingsContext);
@@ -60,7 +56,7 @@ const Portal = ({ children, overlay, theme: themeOverrides }: Props) => {
   const reduceMotion = React.useContext(ReduceMotionContext);
 
   return (
-    <PortalConsumer manager={manager} overlay={overlay}>
+    <PortalConsumer manager={manager} modal={modal}>
       <SettingsProvider value={settings}>
         <ReduceMotionContext.Provider value={reduceMotion}>
           <LocaleProvider direction={direction}>

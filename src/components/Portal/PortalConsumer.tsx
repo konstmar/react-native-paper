@@ -5,27 +5,20 @@ import type { PortalMethods } from './PortalHost';
 type Props = {
   manager: PortalMethods;
   children: React.ReactNode;
-  overlay?: boolean;
+  modal?: boolean;
 };
 
 export default class PortalConsumer extends React.Component<Props> {
   componentDidMount() {
     this.checkManager();
 
-    this.key = this.props.manager.mount(
-      this.props.children,
-      this.props.overlay
-    );
+    this.key = this.props.manager.mount(this.props.children, this.props.modal);
   }
 
   componentDidUpdate() {
     this.checkManager();
 
-    this.props.manager.update(
-      this.key,
-      this.props.children,
-      this.props.overlay
-    );
+    this.props.manager.update(this.key, this.props.children, this.props.modal);
   }
 
   componentWillUnmount() {
