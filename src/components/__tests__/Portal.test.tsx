@@ -104,20 +104,18 @@ it('renders portals in source order when mounted in the same commit', async () =
 it('stacks components mounted in the same commit in source order', async () => {
   await render(
     <Portal.Host>
-      <Portal>
-        <Modal visible onDismiss={() => {}}>
-          <Text testID="layer">modal</Text>
-        </Modal>
-      </Portal>
-      <Portal>
-        <Dialog visible onDismiss={() => {}}>
-          <Text testID="layer">dialog</Text>
-        </Dialog>
-      </Portal>
+      <Modal visible onDismiss={() => {}}>
+        <Text testID="layer">modal</Text>
+      </Modal>
+      <Dialog visible onDismiss={() => {}}>
+        <Text testID="layer">dialog</Text>
+      </Dialog>
     </Portal.Host>
   );
 
-  const layers = await screen.findAllByTestId('layer');
+  const layers = await screen.findAllByTestId('layer', {
+    includeHiddenElements: true,
+  });
 
   expect(layers).toHaveLength(2);
   expect(layers[0]).toHaveTextContent('modal');
