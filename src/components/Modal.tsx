@@ -33,6 +33,10 @@ export type Props = {
    */
   onDismiss?: () => void;
   /**
+   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the modal.
+   */
+  overlayAccessibilityLabel?: string;
+  /**
    * Accessible name for the modal.
    */
   'aria-label'?: string;
@@ -131,6 +135,7 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  overlayAccessibilityLabel = 'Close modal',
   'aria-label': ariaLabel,
   overlayTestID,
   onDismiss = () => {},
@@ -234,11 +239,14 @@ function Modal({
       testID={testID}
     >
       <AnimatedPressable
+        aria-label={overlayAccessibilityLabel}
+        role="button"
         disabled={!dismissable}
-        aria-hidden
         onPress={dismissable ? onDismissCallback : undefined}
         style={[styles.backdrop, backdropStyle, backdropTransitionStyle]}
         testID={overlayTestID}
+        importantForAccessibility={dismissable ? 'auto' : 'no'}
+        accessible={dismissable}
       />
       <View
         style={[

@@ -23,7 +23,7 @@ const BackHandler = RNBackHandler as BackHandlerStatic;
 describe('Dialog', () => {
   it('should render passed children', async () => {
     await render(
-      <Dialog visible testID="dialog" overlayTestID="backdrop">
+      <Dialog visible testID="dialog">
         <Text>This is simple dialog</Text>
       </Dialog>
     );
@@ -36,20 +36,12 @@ describe('Dialog', () => {
   it('should call onDismiss when dismissable', async () => {
     const onDismiss = jest.fn();
     await render(
-      <Dialog
-        visible
-        onDismiss={onDismiss}
-        dismissable
-        testID="dialog"
-        overlayTestID="backdrop"
-      >
+      <Dialog visible onDismiss={onDismiss} dismissable testID="dialog">
         <Text>This is simple dialog</Text>
       </Dialog>
     );
 
-    await userEvent.press(
-      screen.getByTestId('backdrop', { includeHiddenElements: true })
-    );
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -60,20 +52,12 @@ describe('Dialog', () => {
   it('should not call onDismiss when dismissable is false', async () => {
     const onDismiss = jest.fn();
     await render(
-      <Dialog
-        visible
-        onDismiss={onDismiss}
-        dismissable={false}
-        testID="dialog"
-        overlayTestID="backdrop"
-      >
+      <Dialog visible onDismiss={onDismiss} dismissable={false} testID="dialog">
         <Text>This is simple dialog</Text>
       </Dialog>
     );
 
-    await userEvent.press(
-      screen.getByTestId('backdrop', { includeHiddenElements: true })
-    );
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
@@ -91,15 +75,12 @@ describe('Dialog', () => {
         dismissable={false}
         dismissableBackButton
         testID="dialog"
-        overlayTestID="backdrop"
       >
         <Text>This is simple dialog</Text>
       </Dialog>
     );
 
-    await userEvent.press(
-      screen.getByTestId('backdrop', { includeHiddenElements: true })
-    );
+    await userEvent.press(screen.getByLabelText('Close modal'));
 
     await act(() => {
       jest.runAllTimers();
