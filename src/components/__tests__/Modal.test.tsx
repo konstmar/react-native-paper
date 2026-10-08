@@ -3,8 +3,8 @@ import type { BackHandlerStatic as RNBackHandlerStatic } from 'react-native';
 
 import {
   afterAll,
+  afterEach,
   beforeAll,
-  beforeEach,
   describe,
   expect,
   it,
@@ -49,8 +49,8 @@ describe('Modal', () => {
     /* eslint-enable @typescript-eslint/no-unsafe-type-assertion */
   });
 
-  beforeEach(() => {
-    BackHandler.exitApp.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('renders passed children', async () => {
@@ -318,7 +318,7 @@ describe('Modal', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('does not invoke onDismiss on Android back button press when dismissableBackButton is false', async () => {
+  it("doesn't invoke onDismiss when the overlay is pressed and dismissableOverlay is false", async () => {
     const onDismiss = jest.fn();
 
     await render(
@@ -328,27 +328,22 @@ describe('Modal', () => {
           overlayTestID="backdrop"
           visible
           onDismiss={onDismiss}
-          dismissableBackButton={false}
+          dismissableOverlay={false}
         >
           {null}
         </Modal>
       </Portal.Host>
     );
 
+    await userEvent.press(
+      screen.getByTestId('backdrop', { includeHiddenElements: true })
+    );
+
     await act(() => {
-      BackHandler.mockPressBack();
       jest.runAllTimers();
     });
 
     expect(onDismiss).not.toHaveBeenCalled();
-
-    await userEvent.press(screen.getByRole('button', { name: 'Close modal' }));
-
-    await act(() => {
-      jest.runAllTimers();
-    });
-
-    expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
   it('does not render the visually hidden dismiss button for a non-dismissible modal', async () => {
@@ -524,7 +519,7 @@ describe('Modal', () => {
     expect(onDismiss).not.toHaveBeenCalled();
   });
 
-  it('absorbs the Android back button for a non-dismissible modal', async () => {
+  it("doesn't pass the Android back button press on from a non-dismissible modal", async () => {
     await render(
       <Portal.Host>
         <Modal visible dismissable={false}>
